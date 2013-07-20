@@ -1,7 +1,5 @@
 package algorithms;
 
-import java.util.Arrays;
-
 import ListTools.SortingList;
 
 public class MergeSort {
@@ -56,10 +54,10 @@ public class MergeSort {
 		SortingList test = new SortingList();
 		int[] testList = test.getList();
 		int testLen = test.getLen();
-		System.out.println(Arrays.toString(testList));
+		System.out.println(test.toString());
 		System.out.println(test.checkSort());
 		mergesort(testList, 0, testLen);
-		System.out.println(Arrays.toString(testList));
+		System.out.println(test.toString());
 		System.out.println(test.checkSort());
 	}
 }

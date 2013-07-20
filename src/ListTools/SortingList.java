@@ -1,5 +1,6 @@
 package ListTools;
 import java.util.Random;
+import java.util.Arrays;
 
 public class SortingList {
 	private int len;
@@ -33,6 +34,9 @@ public class SortingList {
 		return l;
 	}
 	
+	public String toString(){
+		return Arrays.toString(this.numList);
+	}
 	public int[] getList(){
 		return this.numList;
 	}

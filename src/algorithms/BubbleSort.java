@@ -1,5 +1,5 @@
 package algorithms;
-import java.util.Arrays;
+
 
 import ListTools.SortingList;
 
@@ -24,10 +24,10 @@ public class BubbleSort {
 	public static void main(String[] args) {
 		SortingList test = new SortingList();
 		int[] testList = test.getList();
-		System.out.println(Arrays.toString(testList));
+		System.out.println(test.toString());
 		System.out.println(test.checkSort());
 		bubble(testList);
-		System.out.println(Arrays.toString(testList));
+		System.out.println(test.toString());
 		System.out.println(test.checkSort());
 	}
 
