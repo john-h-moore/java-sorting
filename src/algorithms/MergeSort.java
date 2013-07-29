@@ -1,13 +1,32 @@
+
 package algorithms;
 
 import ListTools.SortingList;
 
+/**
+ * 
+ * @author John H Moore	  john@jhmwebdesign.com
+ * 
+ * Java implementation of mergesort
+ *
+ */
 public class MergeSort {
 
-
+	/**
+	 * 
+	 * @param myArray -> array to be sorted
+	 * @param start -> starting index for sorting
+	 * @param end -> ending index for sorting
+	 * 
+	 * More specifically, myArray is sorted between myArray[start] and myArray[end]
+	 */
 	public static void mergesort(int[] myArray, int start, int end){
-		int lEnd;  // left end (i.e. end of left half of array)
-		int rEnd;  // right end (i.e. end of right half of array)
+		/**
+		 * lEnd -> left end (i.e. end of left half of myArray)
+		 * rEnd -> right end (i.e. end of right half of myArray)
+		 */
+		int lEnd;
+		int rEnd;
 		if (end > 1){
 			lEnd = end/2;
 			rEnd = end - lEnd;
@@ -20,13 +39,27 @@ public class MergeSort {
 		}
 	}
 	
-
+	
+	/**
+	 * 
+	 * @param myArray -> array to be sorted
+	 * @param start -> starting index for sorting
+	 * @param lLength -> length of left half of myArray
+	 * @param rLength -> length of right half of myArray
+	 */
 	private static void merge(int[] myArray, int start, int lLength, int rLength){
-		int temp[] = new int[lLength + rLength];  // temp array for sorting
-		int l = 0; // left index
-		int r = 0; // right index
-		int t = 0; // temp index
-		int i; // Use for copying temp back to myArray
+		/**
+		 * temp -> temporary array used for sorting
+		 * l -> left index
+		 * r -> right index
+		 * t -> temp index
+		 * i -> index used for coppying temp back to myArray in sorted order
+		 */
+		int temp[] = new int[lLength + rLength];
+		int l = 0;
+		int r = 0;
+		int t = 0;
+		int i;
 
 		while ( (l < lLength) && (r < rLength) ){
 			if (myArray[start + l] < myArray[start + lLength + r]){
@@ -50,6 +83,11 @@ public class MergeSort {
 		}
 	}
 
+	
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args){
 		SortingList test = new SortingList();
 		int[] testList = test.getList();
