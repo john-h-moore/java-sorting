@@ -12,38 +12,21 @@ import ListTools.SortingList;
 public class QuickSort {
 	
 	/**
-	 * Swap array elements
-	 * @param myArray
-	 * @param i
-	 * @param j
-	 */
-	private static void swap(int[] myArray, int i, int j){
-		int temp = myArray[i];
-		myArray[i] = myArray[j];
-		myArray[j] = temp;
-	}
-	
-	/**
-	 * Choose pivot
-	 * @param myArray
+	 * 
+	 * @param mySortingList
 	 * @param left
 	 * @param right
-	 * @return index of median of first, last, and middle elements of myArray
+	 * @return median(left, right, (left + right)/2)
 	 */
-	private static int choosePivot(int[] myArray, int left, int right){
-		/**
-		 * first -> myArray[left]
-		 * middle -> myArray[(left + right)/2];
-		 * last -> myArray[right]
-		 * return index of median(first, middle, last)
-		 */
-		int first = myArray[left];
-		int middle = myArray[(left + right)/2];
-		int last = myArray[right];
+	private static int choosePivot(SortingList mySortingList, int left, int right){
+		int first = mySortingList.getVal(left);
+		int middle = mySortingList.getVal((left + right)/2);
+		int last = mySortingList.getVal(right);
+		
 		if ( (first <= middle) && (middle <= last) ){
 			return (left + right)/2;
 		}
-		else if ( (first <= last) && (last <= middle) ){
+		else if( (first <= last) && (last <= middle) ){
 			return right;
 		}
 		else{
@@ -53,47 +36,40 @@ public class QuickSort {
 	
 	
 	/**
-	 * Partition
-	 * @param myArray
+	 * 
+	 * @param mySortingList
 	 * @param left
 	 * @param right
 	 * @param pivotIndex
-	 * @return index of new pivot
+	 * @return newPivot
 	 */
-	private static int partition(int[] myArray, int left, int right, int pivotIndex){
-		/**
-		 * pivot -> pivot value
-		 * newPivot -> initialized to left, incremented when swapping two elements in the for-loop
-		 */
-		int pivot = myArray[pivotIndex];
-		swap(myArray, right, pivotIndex);
+	private static int partition(SortingList mySortingList, int left, int right, int pivotIndex){
+		int pivot = mySortingList.getVal(pivotIndex);
+		mySortingList.swap(right, pivotIndex);
 		int newPivot = left;
 		for (int i = left; i < right; i++){
-			if (myArray[i] < pivot){
-				swap(myArray, i, newPivot);
+			if (mySortingList.getVal(i) < pivot){
+				mySortingList.swap(i, newPivot);
 				newPivot++;
 			}
 		}
-		swap(myArray, right, newPivot);
+		mySortingList.swap(right, newPivot);
 		return newPivot;
 	}
 	
-	
+
 	/**
 	 * 
-	 * @param myArray
+	 * @param mySortingList
 	 * @param left
 	 * @param right
 	 */
-	public static void quicksort(int[] myArray, int left, int right){
-		/**
-		 * while myArray > 1 elements, call quicksort recursively
-		 */
+	public static void quicksort(SortingList mySortingList, int left, int right){
 		if (left < right){
-			int pivot = choosePivot(myArray, left, right);
-			int newPivot = partition(myArray, left, right, pivot);
-			quicksort(myArray, left, newPivot - 1);
-			quicksort(myArray, newPivot + 1, right);
+			int pivot = choosePivot(mySortingList, left, right);
+			int newPivot = partition(mySortingList, left, right, pivot);
+			quicksort(mySortingList, left, newPivot - 1);
+			quicksort(mySortingList, newPivot + 1, right);
 		}
 	}
 	
@@ -104,10 +80,9 @@ public class QuickSort {
 	 */
 	public static void main(String[] args) {
 		SortingList test = new SortingList();
-		int[] testList = test.getList();
 		System.out.println(test.toString());
 		System.out.println(test.checkSort());
-		quicksort(testList, 0, testList.length-1);
+		quicksort(test, 0, test.getLen()-1);
 		System.out.println(test.toString());
 		System.out.println(test.checkSort());
 	}

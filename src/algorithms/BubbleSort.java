@@ -11,52 +11,36 @@ import ListTools.SortingList;
  */
 public class BubbleSort {
 	
-	/**
-	 * Swap array elements
-	 * @param myArray
-	 * @param i
-	 * @param j
-	 */
-	private static void swap(int[] myArray, int i, int j){
-		int temp = myArray[i];
-		myArray[i] = myArray[j];
-		myArray[j] = temp;
-	}
-	
-	
+
 	/**
 	 * 
-	 * @param myArray -> array to be sorted
-	 * Takes array as input, sorts in place using bubblesort
+	 * @param mySortingList
 	 */
-	public static void bubble(int[] myArray){
+	public static void bubblesort(SortingList mySortingList){
 		/**
-		 * inner -> increment inner for-loop
-		 * outer -> decrement outer for-loop
+		 * inner -> iterator for inner for-loop
+		 * outer -> iterator for outer for-loop
 		 */
 		int inner;
 		int outer;
-		for (outer = myArray.length; outer > 0; outer--){
+		for (outer = mySortingList.getLen(); outer > 0; outer--){
 			for (inner = 0; inner < outer-1; inner++){
-				if (myArray[inner] > myArray[inner+1]){
-					swap(myArray, inner, inner+1);
+				if (mySortingList.getVal(inner) > mySortingList.getVal(inner + 1)){
+					mySortingList.swap(inner, inner+1);
 				}
 			}
 		}
-		
 	}
-
 	
 	/**
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		SortingList test = new SortingList();
-		int[] testList = test.getList();
+		SortingList test = new SortingList(10);
 		System.out.println(test.toString());
 		System.out.println(test.checkSort());
-		bubble(testList);
+		bubblesort(test);
 		System.out.println(test.toString());
 		System.out.println(test.checkSort());
 	}

@@ -14,72 +14,65 @@ public class MergeSort {
 
 	/**
 	 * 
-	 * @param myArray -> array to be sorted
-	 * @param start -> starting index for sorting
-	 * @param end -> ending index for sorting
-	 * 
-	 * More specifically, myArray is sorted between myArray[start] and myArray[end]
+	 * @param mySortingList
+	 * @param start
+	 * @param end
 	 */
-	public static void mergesort(int[] myArray, int start, int end){
+	public static void mergesort(SortingList mySortingList, int start, int end){
 		/**
-		 * lEnd -> left end (i.e. end of left half of myArray)
-		 * rEnd -> right end (i.e. end of right half of myArray)
+		 * lEnd -> end of the left half
+		 * rEnd -> end of the right half
 		 */
 		int lEnd;
 		int rEnd;
 		if (end > 1){
 			lEnd = end/2;
 			rEnd = end - lEnd;
-
-			mergesort(myArray, start, lEnd);
-			mergesort(myArray, start + lEnd, rEnd);
-
-			merge(myArray, start, lEnd, rEnd);
-
+			mergesort(mySortingList, start, lEnd);
+			mergesort(mySortingList, start + lEnd, rEnd);
+			merge(mySortingList, start, lEnd, rEnd);
 		}
 	}
 	
 	
 	/**
 	 * 
-	 * @param myArray -> array to be sorted
-	 * @param start -> starting index for sorting
-	 * @param lLength -> length of left half of myArray
-	 * @param rLength -> length of right half of myArray
+	 * @param mySortingList
+	 * @param start
+	 * @param lLength
+	 * @param rLength
 	 */
-	private static void merge(int[] myArray, int start, int lLength, int rLength){
+	public static void merge(SortingList mySortingList, int start, int lLength, int rLength){
 		/**
-		 * temp -> temporary array used for sorting
-		 * l -> left index
-		 * r -> right index
-		 * t -> temp index
-		 * i -> index used for coppying temp back to myArray in sorted order
+		 * temp[] -> temporary array
+		 * l -> iterator for left half
+		 * r -> iterator for right half
+		 * t -> iterator for temp array
 		 */
 		int temp[] = new int[lLength + rLength];
 		int l = 0;
 		int r = 0;
 		int t = 0;
-		int i;
-
+		
 		while ( (l < lLength) && (r < rLength) ){
-			if (myArray[start + l] < myArray[start + lLength + r]){
-				temp[t++] = myArray[start + (l++)];
+			if ( mySortingList.getVal(start + l) < mySortingList.getVal(start + lLength + r) ){
+				temp[t++] = mySortingList.getVal(start + (l++));
 			}
 			else{
-				temp[t++] = myArray[start + lLength + (r++)];
+				temp[t++] = mySortingList.getVal(start + lLength + (r++));
 			}
 		}
-
+		
 		while (l < lLength){
-			temp[t++] = myArray[start + (l++)];
+			temp[t++] = mySortingList.getVal(start + (l++));
 		}
-
+		
 		while (r < rLength){
-			temp[t++] = myArray[start + lLength + (r++)];
+			temp[t++] = mySortingList.getVal(start + lLength + (r++));
 		}
-
-		for (i = 0; i < lLength + rLength; i++){
-			myArray[start + i] = temp[i];
+		
+		for (int i = 0; i < lLength + rLength; i++){
+			mySortingList.setVal(start + i, temp[i]);
 		}
 	}
 
@@ -90,11 +83,12 @@ public class MergeSort {
 	 */
 	public static void main(String[] args){
 		SortingList test = new SortingList();
-		int[] testList = test.getList();
-		int testLen = test.getLen();
+		//int[] testList = test.getList();
+		//int testLen = test.getLen();
 		System.out.println(test.toString());
 		System.out.println(test.checkSort());
-		mergesort(testList, 0, testLen);
+		mergesort(test, 0, test.getLen());
+		//mergesort2(testList, 0, testLen);
 		System.out.println(test.toString());
 		System.out.println(test.checkSort());
 	}
