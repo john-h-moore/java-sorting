@@ -78,7 +78,7 @@ public class SortingList {
 	}
 	
 	/**
-	 * toString() method
+	 * Calls Arrays.toString() on numList
 	 */
 	public String toString(){
 		return Arrays.toString(this.numList);
@@ -112,4 +112,35 @@ public class SortingList {
 		}
 		return true;
 	}
+	
+	/**
+	 * 
+	 * @param i -> index
+	 * @param v -> value
+	 */
+	public void setVal(int i, int v){
+		this.numList[i] = v;
+	}
+	
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * swap numList[i] and numList[j]
+	 */
+	public void swap(int i, int j){
+		int temp = this.numList[i];
+		this.numList[i] = this.numList[j];
+		this.numList[j] = temp;
+	}
+	
+	/**
+	 * 
+	 * @param i -> index
+	 * @return numList[i]
+	 */
+	public int getVal(int i){
+		return this.numList[i];
+	}
+	
 }
